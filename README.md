@@ -1,121 +1,117 @@
 # CHIP-8 Emulator
 
-A complete CHIP-8 emulator written in C with SDL2, supporting original CHIP-8, SuperChip, and XO-CHIP extensions.
-
 ## Overview
 
-This CHIP-8 emulator provides an accurate implementation of the CHIP-8 virtual machine, a simple interpreted programming language developed in the 1970s. The emulator features customizable display options, audio settings, and support for various CHIP-8 extensions.
+This project is a complete CHIP-8 emulator written in C, utilizing SDL2 for graphics and audio. It supports the original CHIP-8 instruction set along with SuperChip and XO-CHIP extensions. The emulator provides customizable display settings, audio configurations, and real-time execution control.
 
-## Why an Emulator?
+## Motivation
 
-I chose to build a CHIP-8 emulator as my project for several key reasons:
+Building a CHIP-8 emulator served as a practical project to deepen my understanding of low-level programming, computer architecture, and real-time systems. Key learning outcomes include:
 
-- **Learning C and Low-Level Programming**: As I intend to pursue a career in the hardware industry, developing strong skills in C and understanding low-level programming concepts was essential. This project provided hands-on experience with memory management, bitwise operations, and direct hardware interaction.
-
-- **Understanding Computer Architecture**: Building an emulator requires thoroughly understanding CPU operation, instruction execution cycles, memory management, and I/O handling - all fundamental concepts in computer architecture.
-
-- **Real-Time Systems**: The emulator operates as a real-time system with precise timing requirements for instruction execution, display updates, and sound generation - skills directly applicable to embedded systems development.
-
-- **Hardware/Software Interface**: This project stands at the intersection of hardware and software, providing practical experience with concepts often encountered in hardware development.
-
-- **Practical Learning Path**: CHIP-8's simplicity made it an ideal starting point for emulation, offering the perfect balance of challenge and achievability while teaching core concepts applicable to more complex systems.
+- **Proficiency in C and Low-Level Programming**: Strengthening concepts in memory management, bitwise operations, and direct hardware interaction.
+- **Understanding of Computer Architecture**: Implementing an emulator required a deep dive into CPU operation, instruction cycles, memory management, and I/O handling.
+- **Real-Time System Design**: Precise timing control for instruction execution, display refresh, and sound generation aligns with embedded system development.
+- **Hardware-Software Interface**: Bridging the gap between software and hardware design, gaining experience with how processors interpret and execute instructions.
+- **Scalable Learning Path**: The CHIP-8 system is an ideal entry point into emulator development, offering a balance between complexity and accessibility.
 
 ## Features
 
-### Core Features
+### Core Functionality
 
-- Full implementation of all standard CHIP-8 instructions
+- Complete implementation of all standard CHIP-8 instructions
 - Support for CHIP-8, SuperChip, and XO-CHIP extensions
 - 64x32 pixel display with configurable scaling
 - 16-key hexadecimal keypad input
-- Sound generation with configurable wave type
-- Color interpolation for smoother display changes
-- Configurable emulation speed
+- Sound generation with configurable waveform options
+- Color interpolation for smoother display rendering
+- Adjustable emulation speed
 
-### Display Options
+### Display Settings
 
-- Adjustable scaling factor
+- Scalable rendering
 - Optional pixel outlines
-- Color interpolation with adjustable rate
+- Adjustable color interpolation rate
 
-### Audio Options
+### Audio Configuration
 
-- Sine wave or square wave sound generation
-- Adjustable volume
-- Standard 440Hz frequency
+- Selectable sine wave or square wave sound generation
+- Adjustable volume control
+- Default frequency set to 440Hz
 
-### Input Controls
+### Input Handling
 
-- Standard CHIP-8 keypad mapped to keyboard:
-  - Arrow key alternatives for movement (UP, DOWN, LEFT, RIGHT)
+- Standard CHIP-8 keypad mapped to a keyboard
+- Alternative arrow key mappings for movement (UP, DOWN, LEFT, RIGHT)
 
-### Command Line Arguments
+## Command-Line Arguments
 
-#### Options
+The emulator supports various command-line options for customization:
 
-- `--scale-factor <number>`: Set display scaling (default: 15)
-- `--sine-wave`: Use sine wave for sound (default)
-- `--square-wave`: Use square wave for sound
-- `--pixel-outline`: Enable pixel outlines (default)
-- `--no-pixel-outline`: Disable pixel outlines
-- `--chip8`: Use original CHIP-8 behavior (default)
-- `--superchip`: Use SuperChip extensions
-- `--xochip`: Use XO-CHIP extensions
+| Option               | Description                                      |
+|----------------------|--------------------------------------------------|
+| `--scale-factor <n>` | Set display scaling (default: 15)               |
+| `--sine-wave`        | Use sine wave for sound (default)               |
+| `--square-wave`      | Use square wave for sound                       |
+| `--pixel-outline`    | Enable pixel outlines (default)                 |
+| `--no-pixel-outline` | Disable pixel outlines                          |
+| `--chip8`            | Use original CHIP-8 behavior (default)          |
+| `--superchip`        | Enable SuperChip extensions                     |
+| `--xochip`           | Enable XO-CHIP extensions                       |
 
-### Keyboard Controls
+## Controls
 
-#### Emulator Controls
+### Emulator Controls
 
-- `ESC`: Quit the emulator
-- `SPACE`: Pause/resume emulation
-- `=` (equals): Reset emulator
-- `J/K`: Decrease/increase color lerp rate
-- `O/P`: Decrease/increase volume
-- `T`: Toggle between sine and square wave sound
-- `Y`: Toggle pixel outlines
+- `ESC` - Quit emulator
+- `SPACE` - Pause/resume emulation
+- `=` - Reset emulator
+- `J/K` - Decrease/increase color interpolation rate
+- `O/P` - Decrease/increase volume
+- `T` - Toggle sine/square wave sound
+- `Y` - Toggle pixel outlines
 
-#### CHIP-8 Keypad
+### CHIP-8 Keypad Mapping
 
-Arrow keys are mapped as follows:
+- `UP` → 5
+- `DOWN` → 8
+- `LEFT` → 4
+- `RIGHT` → 6
 
-- `UP`: 5
-- `DOWN`: 8
-- `LEFT`: 4
-- `RIGHT`: 6
+## Extension Support
 
-### Extension Support
+### CHIP-8 (Original)
 
-The emulator supports different CHIP-8 variants with their specific behaviors:
+- Implements the original 1970s CHIP-8 behavior
+- Logical operations (8XY1, 8XY2, 8XY3) reset VF to 0
+- Shift operations (8XY6, 8XYE) copy VY to VX before shifting
+- FX55 and FX65 increment I register
+- Display behavior requires waiting for draw operations
 
-#### CHIP-8 (Original)
+### SuperChip (SCHIP)
 
-- Original CHIP-8 behavior from the 1970s
-- Operations like 8XY1, 8XY2, and 8XY3 reset VF to 0
-- Shift operations 8XY6 and 8XYE first copy VY to VX, then shift
-- FX55 and FX65 increment I
-- Display wait behavior for drawing sprites
+- Enhanced functionality with additional instructions
+- Logical operations do not modify VF
+- Shift operations directly modify VX
+- FX55 and FX65 do not increment I register
 
-#### SuperChip (SCHIP)
+### XO-CHIP
 
-- SuperChip extensions
-- Logical operations do not affect VF
-- Shift operations work directly on VX
-- FX55 and FX65 do not increment I
-
-#### XO-CHIP
-
-- Modern XO-CHIP extensions
-- Similar behavior to SuperChip for most operations
+- Introduces modern CHIP-8 extensions
+- Mostly follows SuperChip behavior with added capabilities
 
 ## Building from Source
 
 ### Prerequisites
 
-- C compiler (gcc or clang)
+Ensure the following dependencies are installed:
+
+- C compiler (GCC or Clang)
 - SDL2 library
-- Make (optional but recommended)
+- `make` (optional but recommended)
 
 ### Compilation
+
+To compile the emulator, run:
 
 ```bash
 make
