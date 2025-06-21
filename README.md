@@ -115,3 +115,5 @@ To compile the emulator, run:
 
 ```bash
 make
+
+./chip8 path/to/rom.ch8 [CLI options]
