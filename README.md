@@ -120,6 +120,7 @@ Building this emulator served as a deep dive into systems-level programming, arc
 
 ```bash
 make
+<<<<<<< HEAD
 ```
 
 ---
@@ -136,3 +137,7 @@ make
 ## License
 
 MIT License — free for academic and commercial use.
+=======
+
+./chip8 path/to/rom.ch8 [CLI options]
+>>>>>>> ccce96af864bc690ef3a0cc03817a9b5d30c95c1
